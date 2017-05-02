@@ -256,33 +256,33 @@ public class Homepage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    private void remem(){
-        try{
-           con = Connect.connect();
-          
-           Statement s = con.createStatement();
-           String FindID = "select ID from infomem where FullName = '"+lbName.getText()+"' and Username = '"+lbUS.getText()+"' ";
-            ResultSet rs = s.executeQuery(FindID);
-            if(rs.next()){
-                String ID = rs.getString(1);  
-               // System.out.println(ID);
-                
-                    String sql = "Update remember set  Status = 'No' where ID = '"+ID+"'";
-                    s.executeUpdate(sql);
-                    
-                
-        }
-        }catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Connect to database fail!! :(");
-        }
-    }
+//    private void remem(){
+//        try{
+//           con = Connect.connect();
+//          
+//           Statement s = con.createStatement();
+//           String FindID = "select ID from infomem where FullName = '"+lbName.getText()+"' and Username = '"+lbUS.getText()+"' ";
+//            ResultSet rs = s.executeQuery(FindID);
+//            if(rs.next()){
+//                String ID = rs.getString(1);  
+//               // System.out.println(ID);
+//                
+//                    String sql = "Update remember set  Status = 'No' where ID = '"+ID+"'";
+//                    s.executeUpdate(sql);
+//                    
+//                
+//        }
+//        }catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, "Connect to database fail!! :(");
+//        }
+//    }
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
        System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
     private Connection con = null;
     private void lbLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseClicked
         
-        remem();
+//        remem();
         SignInM si = new SignInM();
         si.setVisible(true);
         this.dispose();

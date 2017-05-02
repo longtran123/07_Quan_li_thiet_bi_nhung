@@ -187,7 +187,7 @@ public class ChangePass extends javax.swing.JFrame {
            con = Connect.connect();
             Statement s = con.createStatement();
             String ID = lbID.getText();
-            String PW = txtPW.getText();
+            int PW = txtPW.getText().hashCode();
            
             String info = "UPDATE `infomem` SET `Password`= '"+PW+"' WHERE ID = '"+ID+"'";
             String acc = "UPDATE `account` SET `Password`= '"+PW+"' WHERE ID = '"+ID+"'";
@@ -208,7 +208,7 @@ public class ChangePass extends javax.swing.JFrame {
     }
     private void setValue(){
             String PW = txtPW.getText();
-            InforAccount.tableModel.setValueAt(PW,row,2);
+            InforAccount.tableModel.setValueAt(PW.hashCode(),row,2);
     }
      
     private void btnCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanActionPerformed

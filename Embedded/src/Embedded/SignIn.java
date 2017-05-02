@@ -49,7 +49,6 @@ public class SignIn extends javax.swing.JFrame {
         txtPW = new javax.swing.JPasswordField();
         jPanel4 = new javax.swing.JPanel();
         lbExit = new javax.swing.JLabel();
-        ckRe = new javax.swing.JCheckBox();
         btnSignIn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -172,11 +171,6 @@ public class SignIn extends javax.swing.JFrame {
         jPanel3.add(jPanel4);
         jPanel4.setBounds(0, 0, 390, 30);
 
-        ckRe.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ckRe.setText("Remember me?");
-        jPanel3.add(ckRe);
-        ckRe.setBounds(40, 220, 140, 23);
-
         btnSignIn.setBackground(new java.awt.Color(51, 51, 255));
         btnSignIn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSignIn.setForeground(new java.awt.Color(255, 255, 255));
@@ -239,28 +233,28 @@ public class SignIn extends javax.swing.JFrame {
          return a;
     }
     
-    private void Remember(){
-        try{
-           con = Connect.connect();
-          
-           Statement s = con.createStatement();
-           String FindID = "select ID from accounta where Username = '"+txtUS.getText()+"' ";
-            ResultSet rs = s.executeQuery(FindID);
-            if(rs.next()){
-                String ID = rs.getString(1);  
-               // System.out.println(ID);
-                if(ckRe.isSelected()){
-                    String sql = "Update remembera set Username = '"+txtUS.getText()+"', Password = '"+txtPW.getText()+"', Status = 'Yes' where ID = '"+ID+"'";
-                    s.executeUpdate(sql);
-                }else if(!ckRe.isSelected()){
-                    String sql = "Update remembera set  Status = 'No' where ID = '"+ID+"'";
-                    s.executeUpdate(sql);
-                }
-        }
-        }catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Connect to database fail!! :(");
-        }
-    }
+//    private void Remember(){
+//        try{
+//           con = Connect.connect();
+//          
+//           Statement s = con.createStatement();
+//           String FindID = "select ID from accounta where Username = '"+txtUS.getText()+"' ";
+//            ResultSet rs = s.executeQuery(FindID);
+//            if(rs.next()){
+//                String ID = rs.getString(1);  
+//               // System.out.println(ID);
+//                if(ckRe.isSelected()){
+//                    String sql = "Update remembera set  Status = 'Yes' where ID = '"+ID+"'";
+//                    s.executeUpdate(sql);
+//                }else if(!ckRe.isSelected()){
+//                    String sql = "Update remembera set  Status = 'No' where ID = '"+ID+"'";
+//                    s.executeUpdate(sql);
+//                }
+//        }
+//        }catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, "Connect to database fail!! :(");
+//        }
+//    }
     
     private void Username(){
             txtUS.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
@@ -351,15 +345,34 @@ public class SignIn extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lbExitMouseClicked
 
-    
+    private boolean hasd(){
+        boolean ck = false;
+        try {
+           con = Connect.connect();
+            Statement s = con.createStatement();
+            
+            String sql = "SELECT * FROM `remembera` where `Status` = 'No' and `Username` = '"+txtUS.getText()+"'";
+            ResultSet rs = s.executeQuery(sql);
+            if(rs.next()){ 
+                ck = true;
+                
+            }
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return ck;
+    }
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        Remember();
-        String sql = "Select * from accounta where Username=? and Password=?";
+//        Remember();
+       
+        String sql = "Select * from accounta where (Username=? and Password=?) ";
         try{
             con = Connect.connect();
             pst = con.prepareStatement(sql);
             pst.setString(1,txtUS.getText());
-            pst.setString(2,txtPW.getText());
+            pst.setInt(2,txtPW.getText().hashCode());
+            
             rs = pst.executeQuery();
 
             if(txtUS.getText().equals("") ||txtUS.getText().equals("Username")){
@@ -381,6 +394,7 @@ public class SignIn extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
     }//GEN-LAST:event_btnSignInActionPerformed
     int posX=0,posY=0;
     private void jPanel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseDragged
@@ -395,25 +409,25 @@ public class SignIn extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        lbEX1.setVisible(false);
       lbEX2.setVisible(false);
-      try{
-           con = Connect.connect();
-           //conn=DriverManager.getConnection(dbURl);
-           String sql = "Select * from remembera where Status = 'Yes'";
-          
-            Statement s = con.createStatement();
-            
-            ResultSet rs = s.executeQuery(sql);
-           
-           if(rs.next()){
-                String US = rs.getString(1);
-                String PW = rs.getString(2); 
-                ckRe.setSelected(true);
-                txtUS.setText(US);
-                txtPW.setText(PW);
-           }
-       } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Connect to database fail!! :(");
-        }
+//      try{
+//           con = Connect.connect();
+//           //conn=DriverManager.getConnection(dbURl);
+//           String sql = "Select * from remembera where Status = 'Yes'";
+//          
+//            Statement s = con.createStatement();
+//            
+//            ResultSet rs = s.executeQuery(sql);
+//           
+//           if(rs.next()){
+//                String US = rs.getString(1);
+//                String PW = rs.getString(2); 
+////                ckRe.setSelected(true);
+//                txtUS.setText(US);
+//                txtPW.setText(PW);
+//           }
+//       } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, "Connect to database fail!! :(");
+//        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -453,7 +467,6 @@ public class SignIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSignIn;
-    private javax.swing.JCheckBox ckRe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

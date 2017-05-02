@@ -237,7 +237,7 @@ public class ChangePass extends javax.swing.JPanel {
             Statement st = con.createStatement();
             String ID = lbID.getText();
             String US = lbUS.getText();
-            String NPW = txtNPW.getText();
+            int NPW = txtNPW.getText().hashCode();
             
             String CP1 = "Update account set Password = '"+NPW+"' where ID = '"+ID+"' and Username = '"+US+"'";
             String CP2 = "Update infomem set Password = '"+NPW+"' where ID = '"+ID+"' and Username = '"+US+"'";
@@ -273,7 +273,7 @@ public class ChangePass extends javax.swing.JPanel {
            con = Connect.connect();
             Statement s = con.createStatement();
             
-            String sql = "SELECT * FROM `account` where Username = '"+lbUS.getText()+"' and Password = '"+txtOPW.getText()+"'";
+            String sql = "SELECT * FROM `account` where Username = '"+lbUS.getText()+"' and Password = '"+txtOPW.getText().hashCode()+"'";
             ResultSet rs = s.executeQuery(sql);
             if(rs.next()){ 
                 if(txtNPW.getText().equals(txtCPW.getText())){

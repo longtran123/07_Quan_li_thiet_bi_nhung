@@ -475,7 +475,7 @@ public class NewAccount extends javax.swing.JPanel {
             String EM = txtEM.getText();
             String US = txtUS.getText();
             String Gen = (String) cbbGen.getSelectedItem();
-            String PW = txtPW.getText();
+            int PW = txtPW.getText().hashCode();
             String FN = txtFN.getText();
             String ID = IDUser();
             String Acc = "INSERT INTO `account` (`Username`, `Password`, `ID`) VALUES ('"+US+"', '"+PW+"', '"+ID+"')";
