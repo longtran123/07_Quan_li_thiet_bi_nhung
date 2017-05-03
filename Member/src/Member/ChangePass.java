@@ -126,6 +126,7 @@ public class ChangePass extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Confirm");
 
+        btnChange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/1493816792_arrow_circle_double.png"))); // NOI18N
         btnChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangeActionPerformed(evt);
@@ -188,7 +189,7 @@ public class ChangePass extends javax.swing.JPanel {
                                 .addComponent(txtCapcha, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 186, Short.MAX_VALUE))))
+                        .addGap(0, 143, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,13 +262,13 @@ public class ChangePass extends javax.swing.JPanel {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         if(txtOPW.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Old password not empty!");
+            JOptionPane.showMessageDialog(null, "Old password is not empty!");
         }else if(txtNPW.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "New password not empty!");
+            JOptionPane.showMessageDialog(null, "New password is not empty!");
         }else if (txtCPW.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Confirm password not empty!");
+            JOptionPane.showMessageDialog(null, "Confirm password is not empty!");
         }else if(txtConfirm.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Confirm capcha not empty!");
+            JOptionPane.showMessageDialog(null, "Confirm captcha is not empty!");
         }else{
             try {
            con = Connect.connect();
@@ -279,13 +280,13 @@ public class ChangePass extends javax.swing.JPanel {
                 if(txtNPW.getText().equals(txtCPW.getText())){
                     if(txtCapcha.getText().equals(txtConfirm.getText())){
                         ChangePass();
-                        JOptionPane.showMessageDialog(null, "Change password secceess!");
+                        JOptionPane.showMessageDialog(null, "Change password success!");
                         txtCPW.setText(null);
                         txtConfirm.setText(null);
                         txtNPW.setText(null);
                         txtOPW.setText(null);
                     }else{
-                        JOptionPane.showMessageDialog(null, "COnfirm capcha not correct!");
+                        JOptionPane.showMessageDialog(null, "Confirm capcha not correct!");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "Confirm passoword not correct!");

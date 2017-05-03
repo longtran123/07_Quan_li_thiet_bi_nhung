@@ -5,7 +5,6 @@
  */
 package Member;
 
-import static Member.BorrowList.tableModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -23,6 +22,7 @@ public class Homepage extends javax.swing.JFrame {
     public Homepage() {
         this.setUndecorated(true);
         initComponents();
+        lbUS.setVisible(false);
     }
 
     /**
@@ -42,7 +42,6 @@ public class Homepage extends javax.swing.JFrame {
         lbName = new javax.swing.JLabel();
         lbLogOut = new javax.swing.JLabel();
         lbUS = new javax.swing.JLabel();
-        lb = new javax.swing.JLabel();
         btnBorrow = new javax.swing.JButton();
         btnGiveBack = new javax.swing.JButton();
         btnChangePass = new javax.swing.JButton();
@@ -80,11 +79,12 @@ public class Homepage extends javax.swing.JFrame {
 
         lbName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbName.setForeground(new java.awt.Color(102, 102, 255));
+        lbName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbName.setText("Name");
 
-        lbLogOut.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbLogOut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbLogOut.setForeground(new java.awt.Color(0, 0, 204));
-        lbLogOut.setText("Log Out");
+        lbLogOut.setText("(Logout)");
         lbLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbLogOutMouseClicked(evt);
@@ -95,10 +95,6 @@ public class Homepage extends javax.swing.JFrame {
         lbUS.setForeground(new java.awt.Color(153, 0, 0));
         lbUS.setText("Username");
 
-        lb.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lb.setForeground(new java.awt.Color(153, 0, 0));
-        lb.setText("Username:");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -106,52 +102,50 @@ public class Homepage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbLogOut)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(3, 3, 3)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
+                        .addGap(40, 413, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lb)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbUS, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbUS, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                                .addComponent(lbLogOut)
+                                .addContainerGap())))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(23, Short.MAX_VALUE)
+                        .addContainerGap(26, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addComponent(jLabel3)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbUS)
-                            .addComponent(lb))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(lbLogOut)
+                        .addComponent(lbUS)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbLogOut))
                 .addContainerGap())
         );
 
         btnBorrow.setBackground(new java.awt.Color(51, 51, 255));
         btnBorrow.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnBorrow.setForeground(new java.awt.Color(255, 255, 255));
-        btnBorrow.setText("Borrow");
+        btnBorrow.setText("Devices List");
         btnBorrow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrowActionPerformed(evt);
@@ -161,7 +155,7 @@ public class Homepage extends javax.swing.JFrame {
         btnGiveBack.setBackground(new java.awt.Color(51, 51, 255));
         btnGiveBack.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnGiveBack.setForeground(new java.awt.Color(255, 255, 255));
-        btnGiveBack.setText("Give back");
+        btnGiveBack.setText("Given-back List");
         btnGiveBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGiveBackActionPerformed(evt);
@@ -171,7 +165,7 @@ public class Homepage extends javax.swing.JFrame {
         btnChangePass.setBackground(new java.awt.Color(51, 51, 255));
         btnChangePass.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnChangePass.setForeground(new java.awt.Color(255, 255, 255));
-        btnChangePass.setText("Change Pass");
+        btnChangePass.setText("Change password");
         btnChangePass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangePassActionPerformed(evt);
@@ -191,7 +185,7 @@ public class Homepage extends javax.swing.JFrame {
         btnBorrowList.setBackground(new java.awt.Color(51, 51, 255));
         btnBorrowList.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnBorrowList.setForeground(new java.awt.Color(255, 255, 255));
-        btnBorrowList.setText("Borrow List");
+        btnBorrowList.setText("Borrowed-List");
         btnBorrowList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrowListActionPerformed(evt);
@@ -467,7 +461,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lb;
     private javax.swing.JLabel lbLogOut;
     public javax.swing.JLabel lbName;
     public javax.swing.JLabel lbUS;

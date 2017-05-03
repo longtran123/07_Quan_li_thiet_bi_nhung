@@ -187,10 +187,11 @@ public class GiveBack extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtSearchL))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSearchL, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -198,14 +199,14 @@ public class GiveBack extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private Connection con = null;
-    public DefaultTableModel tableModel = new DefaultTableModel(){
+    public static DefaultTableModel tableModel = new DefaultTableModel(){
         @Override
         public boolean isCellEditable(int row, int column)
         {
             return false;
         }
     };
-    public DefaultTableModel tableModelGB = new DefaultTableModel(){
+    public static DefaultTableModel tableModelGB = new DefaultTableModel(){
         @Override
         public boolean isCellEditable(int row, int column)
         {
@@ -356,7 +357,7 @@ public class GiveBack extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         ClearCon();
         SearchCon();
-        JOptionPane.showMessageDialog(null, "Search seccess!");
+        JOptionPane.showMessageDialog(null, "Search success!");
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
@@ -450,7 +451,7 @@ public class GiveBack extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ClearGB();
         SearchLi();
-        JOptionPane.showMessageDialog(null, "Search seccess!");
+        JOptionPane.showMessageDialog(null, "Search success!");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtSearchLFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchLFocusGained
@@ -471,8 +472,8 @@ public class GiveBack extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblGivebackCon;
-    private javax.swing.JTable tblGivebackList;
+    public javax.swing.JTable tblGivebackCon;
+    public javax.swing.JTable tblGivebackList;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSearchL;
     // End of variables declaration//GEN-END:variables

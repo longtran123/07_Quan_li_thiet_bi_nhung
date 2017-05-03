@@ -257,7 +257,7 @@ public class InforAccount extends javax.swing.JPanel {
                     }else{
                         Clear();
                         Search();
-                        JOptionPane.showMessageDialog(null, "Search seccess!");
+                        JOptionPane.showMessageDialog(null, "Search success!");
                     }
        }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -373,7 +373,7 @@ public class InforAccount extends javax.swing.JPanel {
                 DeleteAcc();
                 Clear();
                 loadTable();
-                JOptionPane.showMessageDialog(null, "Seccess!");
+                JOptionPane.showMessageDialog(null, "Success!");
             }else{
                 JOptionPane.showMessageDialog(null, "Connot delete this account!");
             }

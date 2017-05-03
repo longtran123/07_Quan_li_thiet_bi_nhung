@@ -6,7 +6,6 @@
 package Embedded;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -47,7 +46,6 @@ public class Homepage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lbLogOut = new javax.swing.JLabel();
         btnREBR = new javax.swing.JButton();
         btnREGB = new javax.swing.JButton();
         btnDevices = new javax.swing.JButton();
@@ -102,15 +100,6 @@ public class Homepage extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(204, 0, 0));
         jLabel4.setText("Admin");
 
-        lbLogOut.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbLogOut.setForeground(new java.awt.Color(0, 0, 204));
-        lbLogOut.setText("Log Out");
-        lbLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbLogOutMouseClicked(evt);
-            }
-        });
-
         btnREBR.setBackground(new java.awt.Color(102, 0, 0));
         btnREBR.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnREBR.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,9 +141,7 @@ public class Homepage extends javax.swing.JFrame {
                         .addComponent(btnREBR, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnREGB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbLogOut)
-                        .addGap(28, 28, 28))))
+                        .addGap(28, 156, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +160,6 @@ public class Homepage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbLogOut)
                     .addComponent(btnREBR)
                     .addComponent(btnREGB))
                 .addGap(17, 17, 17))
@@ -373,12 +359,6 @@ public class Homepage extends javax.swing.JFrame {
         this.setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void lbLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseClicked
-       SignIn si = new SignIn();
-       si.setVisible(true);
-       this.dispose();
-    }//GEN-LAST:event_lbLogOutMouseClicked
-
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         Home h = new Home();
         Home.removeAll();
@@ -467,6 +447,5 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbLogOut;
     // End of variables declaration//GEN-END:variables
 }

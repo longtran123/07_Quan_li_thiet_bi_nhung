@@ -210,6 +210,7 @@ public class NewAccount extends javax.swing.JPanel {
             }
         });
 
+        btnChange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/1493816792_arrow_circle_double.png"))); // NOI18N
         btnChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangeActionPerformed(evt);
@@ -419,15 +420,15 @@ public class NewAccount extends javax.swing.JPanel {
          }
          if(cbbDay.getSelectedItem().equals("Day")){
              cbbDay.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-             cbbDay.setToolTipText("You need select the day of birth");
+             cbbDay.setToolTipText("You need to select the day of birth");
         }
          if(cbbMonth.getSelectedItem().equals("Month")){
              cbbMonth.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-             cbbMonth.setToolTipText("You need select the month of birth");
+             cbbMonth.setToolTipText("You need to select the month of birth");
          }
          if(cbbYear.getSelectedItem().equals("Year")){
              cbbYear.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-             cbbYear.setToolTipText("You need select the year of birth");
+             cbbYear.setToolTipText("You need to select the year of birth");
          }
          if(txtUS.getText().equals("")){
              ErrorUS();
@@ -443,13 +444,13 @@ public class NewAccount extends javax.swing.JPanel {
              String cpw = txtCPW.getText();
              if(!pw.equals(cpw)){
                 txtCPW.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-                 JOptionPane.showMessageDialog(null, "The comfirm password incorect");
+                 JOptionPane.showMessageDialog(null, "The comfirm password is incorrect");
              }
         }
          
          if(!txtCon.getText().equals(txtCapcha.getText())){
              txtCon.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red));
-             JOptionPane.showMessageDialog(null, "Capcha incorect");
+             JOptionPane.showMessageDialog(null, "Captcha is incorrect");
          }
          ////
          if(!txtFN.getText().matches(r1)){
@@ -619,7 +620,7 @@ public class NewAccount extends javax.swing.JPanel {
            pst.setString(1,txtUS.getText());
            rs = pst.executeQuery();
            if(rs.next()){
-               JOptionPane.showMessageDialog(null, "The username exist!");
+               JOptionPane.showMessageDialog(null, "The username is exist already!");
               
            }else{
                Create();

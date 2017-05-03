@@ -16,7 +16,7 @@ public class Connect {
     public static Connection connect(){
        try{  
  //           Class.forName("com.mysql.jdbc.Driver");  
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/qltbn","root","");   
+            con = DriverManager.getConnection("jdbc:mysql://172.16.176.224:3306/qltbn","long","");
             Statement st = con.createStatement();
 //            ResultSet rs = st.executeQuery("Select * from account");
 //            if (rs.next()){

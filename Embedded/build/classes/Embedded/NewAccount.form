@@ -536,6 +536,11 @@
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnChange">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Icon/1493816792_arrow_circle_double.png"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeActionPerformed"/>
       </Events>

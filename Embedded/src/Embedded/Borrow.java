@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import SendMail.GoogleMail;
+import SendMail.InfoMail;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -117,8 +119,8 @@ public class Borrow extends javax.swing.JPanel {
             String Pro = (String) tableModel.getValueAt(i, 3);
              String Status = (String) tableModel.getValueAt(i, 4);
            int Quan =  (int) tableModel.getValueAt(i, 5);
-            String sql = "update borrowde set ConfirmEm = 'Wait Receive' where IDEm = '"+ID+"' and Status = '"+Status+"' and FullName = '"+FN+"' and Project = '"+Pro+"' and QuantityEm = "+Quan+"";
-            String sql2 = "update borrowde2 set ConfirmEm = 'Wait Receive' where IDEm = '"+ID+"' and Status = '"+Status+"' and FullName = '"+FN+"' and Project = '"+Pro+"' and QuantityEm = "+Quan+"";
+            String sql = "update borrowde set ConfirmEm = 'Wait to Receive' where IDEm = '"+ID+"' and Status = '"+Status+"' and FullName = '"+FN+"' and Project = '"+Pro+"' and QuantityEm = "+Quan+"";
+            String sql2 = "update borrowde2 set ConfirmEm = 'Wait to Receive' where IDEm = '"+ID+"' and Status = '"+Status+"' and FullName = '"+FN+"' and Project = '"+Pro+"' and QuantityEm = "+Quan+"";
             s.executeUpdate(sql);
             s.executeUpdate(sql2);
             con.close();
@@ -345,28 +347,107 @@ public class Borrow extends javax.swing.JPanel {
             }else{
                 ClearList();
                 Search();
-                JOptionPane.showMessageDialog(null, "Search seccess!");
+                JOptionPane.showMessageDialog(null, "Search success!");
             }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
-
+    
+    private String ID(){
+         String ID = null;
+        try {
+            con = Connect.connect();
+            
+            Statement s = con.createStatement();
+            String Search = txtSearch.getText();
+            String sql = null;
+            int i = tblConfirm.getSelectedRow();
+            String name = (String) tableModel.getValueAt(i, 0);
+            String IDEm = (String) tableModel.getValueAt(i, 1);
+            String Status = (String) tableModel.getValueAt(i, 4);
+            int Quan =  (int) tableModel.getValueAt(i, 5);
+           
+            sql = "select IDUS from borrowde where FullName = '"+name+"' and IDEm = '"+IDEm+"' and Status = '"+Status+"' and QuantityEm = '"+Quan+"' and ConfirmEm = 'Pending' ";
+            ResultSet rs = s.executeQuery(sql);
+            if(rs.next()){
+                ID = rs.getString("IDUS");
+            }
+            
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    return ID;
+    }
+    private String Email(){
+        String Email = null;
+        try {
+            con = Connect.connect();
+            
+            Statement s = con.createStatement();
+            String sql = null;
+            sql = "select Email from infomem where ID = '"+ID()+"'";
+            ResultSet rs = s.executeQuery(sql);
+            if(rs.next()){
+                Email = rs.getString("Email");
+            }
+            
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    return Email;
+    }
+    InfoMail infoMail;
+    private void sendMailYes(){
+        int i = tblConfirm.getSelectedRow();
+        String name = (String) tableModel.getValueAt(i, 2);
+        String IDEm = (String) tableModel.getValueAt(i, 1);
+        String Status = (String) tableModel.getValueAt(i, 4);
+        int Quan =  (int) tableModel.getValueAt(i, 5);
+        String body = "You have successfully borrowed  devices "+name+" in quantity is "+Quan+" and status "+Status+" \n You can come here to receive devices!";
+        System.out.println("Sending...");
+        String Account = "longb1400767@gmail.com"; // nhap dia chi server vo
+        String pass = "Tranbalong1"; // nhap mat khau vo
+        infoMail = new InfoMail(Account, pass, "Borrow devices", body, Email());
+        infoMail.Send();
+    }
+    
+    private void sendMailNo(){
+        int i = tblConfirm.getSelectedRow();
+        String name = (String) tableModel.getValueAt(i, 2);
+        String IDEm = (String) tableModel.getValueAt(i, 1);
+        String Status = (String) tableModel.getValueAt(i, 4);
+        int Quan =  (int) tableModel.getValueAt(i, 5);
+        String body = "Your devices is not confrimed. \n "+name+", "+Status+", "+Quan+" ";
+        System.out.println("Sending...");
+        String Account = "longb1400767@gmail.com"; // nhap dia chi server vo
+        String pass = "Tranbalong1"; // nhap mat khau vo
+        infoMail = new InfoMail(Account, pass, "Borrow devices", body, Email());
+        infoMail.Send();
+    }
+    
     private void tblConfirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConfirmMouseClicked
         int n = JOptionPane.showConfirmDialog(null,"Borrow cofirmation?","?",JOptionPane.YES_NO_CANCEL_OPTION);
         if(n == JOptionPane.YES_OPTION){
+            sendMailYes();
             Wait();
             ClearConfirm();
             loadTableConfirm();
             ClearList();
             loadTableListW();
             loadTableListR();
+            
             M();
         }else if(n == JOptionPane.NO_OPTION){
+            sendMailNo();
             No();
             ClearConfirm();
             loadTableConfirm();
+           
             M();
         }else
             return;
+       
     }//GEN-LAST:event_tblConfirmMouseClicked
 
     private void cbbSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbSelectActionPerformed
@@ -500,7 +581,7 @@ public class Borrow extends javax.swing.JPanel {
             
             Statement s = con.createStatement();
             
-            ResultSet rs = s.executeQuery("SELECT * FROM BorrowDe where ConfirmEm = 'Wait Receive'");
+            ResultSet rs = s.executeQuery("SELECT * FROM BorrowDe where ConfirmEm = 'Wait to Receive'");
             String []colsName = {"Full name", "ID","Borrow devices","Project","Status","Quantity","Type","Confirm borrow"};
             tableModelL.setColumnIdentifiers(colsName); 
             tblList.setModel(tableModelL);

@@ -562,7 +562,7 @@ public class Embedded extends javax.swing.JPanel {
                         Clear();
                         loadTable();
                         textNull();
-                        JOptionPane.showMessageDialog(null, "Delete database seccess!");
+                        JOptionPane.showMessageDialog(null, "Delete database success!");
             }else {
             return;
             }
@@ -603,7 +603,7 @@ public class Embedded extends javax.swing.JPanel {
                     }else{
                         Clear();
                         Search();
-                        JOptionPane.showMessageDialog(null, "Search seccess!");
+                        JOptionPane.showMessageDialog(null, "Search success!");
                    }
        }
     }//GEN-LAST:event_btnSearchActionPerformed

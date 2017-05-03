@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -458,13 +459,22 @@ public class GetReturn extends javax.swing.JFrame {
                     deleteBorrow();
                     InsertGB();
                     Upem();
-                    JOptionPane.showMessageDialog(null, "Seccess!");
+                    JOptionPane.showMessageDialog(null, "Success!");
+                    this.dispose();
+                    ClearCon();
+                    ClearGB();
+                    loadTableList();
+                    loadTableListGB();
                 }else{
                     deleteBorrowQuan();
                     InsertGB();
                     Upemst();
-                    
-                    JOptionPane.showMessageDialog(null, "Seccess!");
+                    JOptionPane.showMessageDialog(null, "Success!");
+                    this.dispose();
+                    ClearCon();
+                    ClearGB();
+                    loadTableList();
+                    loadTableListGB();
                 }
             }else{
                 String sql2 = "select * from borrowde where IDEm = '"+ID+"' and FullName = '"+FN+"' and ConfirmEm = 'Received' and Status = '"+Status+"'";
@@ -473,13 +483,23 @@ public class GetReturn extends javax.swing.JFrame {
                     upBorrow();
                     Upem();
                     InsertGB();
-                    JOptionPane.showMessageDialog(null, "Seccess!");
+                    JOptionPane.showMessageDialog(null, "Success!");
+                    this.dispose();
+                    ClearCon();
+                    ClearGB();
+                    loadTableList();
+                    loadTableListGB();
                 }else{
                     upBorrowQuan();
                     InsertGB();
                     Upemst();
                     
-                    JOptionPane.showMessageDialog(null, "Seccess!");
+                    JOptionPane.showMessageDialog(null, "Success!");
+                    this.dispose();
+                    ClearCon();
+                    ClearGB();
+                    loadTableList();
+                    loadTableListGB();
                 }
             }
             con.close();
@@ -520,6 +540,88 @@ public class GetReturn extends javax.swing.JFrame {
        this.setLocation (evt.getXOnScreen()-posX,evt.getYOnScreen()-posY);
     }//GEN-LAST:event_jPanel1MouseDragged
 
+
+    
+    private GiveBack gb = new GiveBack();
+    private void ClearCon(){
+        int count = gb.tblGivebackCon.getRowCount();
+        try{
+        while (count > 0 ){
+            gb.tableModel.removeRow(0);
+        }
+        }catch(java.lang.ArrayIndexOutOfBoundsException e){
+            e.getMessage();
+        }
+    }
+    
+    private void ClearGB(){
+        int count = gb.tblGivebackList.getRowCount();
+        try{
+        while (count > 0 ){
+            gb.tableModelGB.removeRow(0);
+        }
+        }catch(java.lang.ArrayIndexOutOfBoundsException e){
+            e.getMessage();
+        }
+    }
+    
+    private void loadTableList(){
+         try {
+            con = Connect.connect();
+            
+            Statement s = con.createStatement();
+            
+            ResultSet rs = s.executeQuery("SELECT * FROM borrowde where ConfirmEm = 'Received'");
+            String []colsName = {"Full name", "ID","Borrow devices","Project","Status","Quantity","Type","Confirm borrow"};
+            gb.tableModel.setColumnIdentifiers(colsName); 
+            gb.tblGivebackCon.setModel(gb.tableModel);
+            while(rs.next()){ 
+                Object rows[] = new Object[8];
+                String Quan = String.valueOf(rs.getInt(6));
+                rows[0] = rs.getString(3);
+                rows[1] = rs.getString(1);  
+                rows[2] = rs.getString(2);
+                rows[3] = rs.getString(4);
+                rows[4] = rs.getString(5);
+                rows[5] = Quan;
+                rows[6] = rs.getString(8);
+                rows[7] = "Is Borrowing";
+                gb.tableModel.addRow(rows);
+            }
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void loadTableListGB(){
+         try {
+            con = Connect.connect();
+            
+            Statement s = con.createStatement();
+            
+            ResultSet rs = s.executeQuery("SELECT * FROM giveback");
+            String []colsName = {"Full name", "ID","Borrow devices","Project","Status","Quantity","Type"};
+            gb.tableModelGB.setColumnIdentifiers(colsName); 
+            gb.tblGivebackList.setModel(gb.tableModelGB);
+            while(rs.next()){ 
+                Object rows[] = new Object[7];
+                String Quan = String.valueOf(rs.getInt(6));
+                rows[0] = rs.getString(1);
+                rows[1] = rs.getString(2);  
+                rows[2] = rs.getString(3);
+                rows[3] = rs.getString(4);
+                rows[4] = rs.getString(5);
+                rows[5] = Quan;
+                rows[6] = rs.getString(7);
+                gb.tableModelGB.addRow(rows);
+            }
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
